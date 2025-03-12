@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+*.pyc
+__pycache__/
+
+# Telethon session files
+*.session
+
+# Config file with sensitive data (e.g. API credentials, monitored users)
+config.py
+
+# Virtual environment directories
+venv/
+env/
+
+tags
