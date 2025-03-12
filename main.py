@@ -4,7 +4,7 @@ import os
 from telethon.sync import TelegramClient
 from config import API_ID, API_HASH, MONITORED_USERS
 
-client = TelegramClient('session_name', API_ID, API_HASH)
+client = TelegramClient('session_name_aws', API_ID, API_HASH)
 
 
 THRESHOLD_DAYS = 9

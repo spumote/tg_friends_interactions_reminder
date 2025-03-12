@@ -4,6 +4,7 @@ __pycache__/
 
 # Telethon session files
 *.session
+*.session-journal
 
 # Config file with sensitive data (e.g. API credentials, monitored users)
 config.py
