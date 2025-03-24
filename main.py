@@ -1,8 +1,9 @@
 import datetime
 import time
 import os
+import requests
 from telethon.sync import TelegramClient
-from config import API_ID, API_HASH, MONITORED_USERS
+from config import API_ID, API_HASH, BOT_TOKEN, CHAT_ID, MONITORED_USERS
 
 client = TelegramClient('session_name_aws', API_ID, API_HASH)
 
@@ -12,6 +13,22 @@ CHECK_INTERVAL = 7200
 NOTIFICATION_COOLDOWN_DAYS = 3
 
 last_notification = {}
+
+
+def send_telegram_message(text):
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    data = {
+        "chat_id": CHAT_ID,
+        "text": text
+    }
+    try:
+        resp = requests.post(url, data=data)
+        if resp.status_code != 200:
+            print(f"Sending error: {resp.text}")
+        else:
+            print("Message sent!")
+    except Exception as e:
+        print("Telegram send message exception:", e)
 
 
 def check_user_last_interaction(user_id: int):
@@ -47,7 +64,7 @@ def main_loop():
                             print(f"Notification for {name} was already sent {diff.days} days ago. Skipping.")
                             continue
                     notification = f"You haven't interacted with {name} (ID: {user_id}) for {inactivity_days} days."
-                    client.send_message('me', notification)
+                    send_telegram_message(notification)
                     print(f"Notification sent: {notification}")
                     last_notification[user_id] = now
             else:
@@ -68,6 +85,7 @@ def main():
     finally:
         client.disconnect()
         print("Client disconnected.")
+
 
 if __name__ == '__main__':
     main()

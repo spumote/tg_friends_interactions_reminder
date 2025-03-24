@@ -9,6 +9,10 @@ Create a file named config.py (and add it to your .gitignore) to store your sens
 ```python
 API_ID = "YOUR_API_ID"
 API_HASH = "YOUR_API_HASH"
+
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+CHAT_ID = "YOUR CHAT_ID"
+
 MONITORED_USERS = {
     123456789: "Alice",
     987654321: "Bob",
